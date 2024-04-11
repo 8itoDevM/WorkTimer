@@ -4,13 +4,6 @@ let sheet_range = 'A1:F1000';
 
 let full_url = 'https://docs.google.com/spreadsheets/d/' + sheet_id + '/gviz/tq?sheet=' + sheet_title + '&range=' + sheet_range;
 
-let name = 'Gustavo Marcolino';
-const date = new Date();
-let horario_inicio = date.toLocaleTimeString('pt-BR');
-//document.getElementById("hrCmc").
-
-console.log(horario_inicio);
-
 fetch(full_url)
 .then(res => res.text())
 .then(rep => {
@@ -23,7 +16,3 @@ fetch(full_url)
     // console.log(data.table.rows[0].c[4].v); - Pega o status na tabela
     // console.log(data.table.rows[0].c[5].v); - Pega as horas semanais totais na tabela
 })
-
-function getData(){
-
-}
