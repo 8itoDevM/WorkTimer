@@ -24,7 +24,7 @@ fetch(full_url)
     
         for(let i = data.table.rows.length - 1; i >= 0; i--){
           if(searchValue == data.table.rows[i].c[3].v){;
-            para.textContent = data.table.rows[i].c[5].v + " horas trabalhadas no total";
+            para.textContent = data.table.rows[i].c[5].v / 1000 + " horas trabalhadas no total";
             break;
           }
         }
