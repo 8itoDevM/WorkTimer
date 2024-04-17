@@ -44,13 +44,26 @@ function doPost(e) {
     
     // Calcular as horas trabalhadas na semana
     var weeklyHours = 0;
-    for (var i = userLastRow; i > userLastRow - 7 && i > 1; i--) {
+    var oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7); // Data de 7 dias atrás
+
+    for (var i = userLastRow; i >= 1; i--) {
+      var pointDate = new Date(sheet.getRange('C' + i).getValue());
+      if (pointDate < oneWeekAgo) {
+        break; // Se a data do ponto é mais de uma semana atrás, paramos de iterar
+      }
+      
       var startTime = new Date(sheet.getRange('A' + i).getValue());
       var endTime = new Date(sheet.getRange('B' + i).getValue());
-      var hoursWorked = (endTime - startTime) / 1000 / 60 / 60; // Convert milissegundos para horas
+      if (isNaN(startTime) || isNaN(endTime)) {
+        continue; // Se não pudermos converter a hora de início ou fim para uma data, ignoramos este ponto
+      }
+      
+      var hoursWorked = (endTime.getTime() - startTime.getTime()) / 1000 / 60 / 60; // Convert milissegundos para horas
       weeklyHours += hoursWorked;
     }
-    sheet.getRange('F' + userLastRow).setValue(weeklyHours);
+    sheet.getRange('F' + userLastRow).setValue(weeklyHours.toFixed(3)); // Arredondamos para duas casas decimais para evitar problemas de precisão
+
     
   } else {
     // Caso contrário, adicionamos uma nova linha com um novo ponto
@@ -79,4 +92,6 @@ function doPost(e) {
   }
 
   return ContentService.createTextOutput("Success");
+}
+
 } */ 
