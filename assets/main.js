@@ -15,83 +15,49 @@ fetch(full_url)
     // console.log(data.table.rows[0].c[3].v); - Pega o nome na tabela
     // console.log(data.table.rows[0].c[4].v); - Pega o status na tabela
     // console.log(data.table.rows[0].c[5].v); - Pega as horas semanais totais na tabela
+
+    function searchHours(){
+      let para = document.createElement("p");
+    
+      setInterval(function() { 
+        let searchValue = document.getElementById('text-search').value;
+    
+        for(let i = data.table.rows.length - 1; i >= 0; i--){
+          if(searchValue == data.table.rows[i].c[3].v){;
+            para.textContent = data.table.rows[i].c[5].v + " horas trabalhadas no total";
+            break;
+          }
+        }
+      }, 800);
+      document.getElementById("hour-search").appendChild(para);
+    }
+    
+
+    searchHours();
 })
-/* const sheets = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1dtA-67RKJ3RJWM5GClAHL3-CkU8qgypmEati0AQNdhg/edit#gid=0");
-const sheet = sheets.getSheetByName("TabelaPontos");
 
-function doPost(e) {
-  let data = e.parameter;
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  const dateWork = new Date();
 
-  // Encontre a próxima linha vazia na coluna A (ID)
-  var lastRow = sheet.getLastRow();
-  var nextRow = lastRow + 1;
 
-  // Procurar a última linha que corresponde ao nome do usuário
-  var userLastRow = -1;
-  for (var i = lastRow; i >= 1; i--) {
-    if (sheet.getRange('D' + i).getValue() == data.nome) {
-      userLastRow = i;
-      break;
-    }
-  }
+// loads
 
-  if (userLastRow != -1 && sheet.getRange('E' + userLastRow).getValue() == "Aberto") {
-    // Se encontramos uma linha correspondente ao usuário e o ponto está aberto, fechamos o ponto
-    sheet.getRange('B' + userLastRow).setValue(dateWork.toLocaleTimeString('pt-BR'));
-    sheet.getRange('E' + userLastRow).setValue("Fechado");
-    
-    // Calcular as horas trabalhadas na semana
-    var weeklyHours = 0;
-    var oneWeekAgo = new Date();
-    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7); // Data de 7 dias atrás
+/* 
+    function searchHours(){
+      let para = document.createElement("p");
 
-    for (var i = userLastRow; i >= 1; i--) {
-      var pointDate = new Date(sheet.getRange('C' + i).getValue());
-      if (pointDate < oneWeekAgo) {
-        break; // Se a data do ponto é mais de uma semana atrás, paramos de iterar
-      }
-      
-      var startTime = new Date(sheet.getRange('A' + i).getValue());
-      var endTime = new Date(sheet.getRange('B' + i).getValue());
-      if (isNaN(startTime) || isNaN(endTime)) {
-        continue; // Se não pudermos converter a hora de início ou fim para uma data, ignoramos este ponto
-      }
-      
-      var hoursWorked = (endTime.getTime() - startTime.getTime()) / 1000 / 60 / 60; // Convert milissegundos para horas
-      weeklyHours += hoursWorked;
-    }
-    sheet.getRange('F' + userLastRow).setValue(weeklyHours.toFixed(3)); // Arredondamos para duas casas decimais para evitar problemas de precisão
+      setInterval(function() { 
+        console.log(document.getElementById('text-search').value); 
 
-    
-  } else {
-    // Caso contrário, adicionamos uma nova linha com um novo ponto
-    sheet.appendRow([data.hrCMC, data.hrTer, data.date, data.nome]);
+        for(let i = data.table.rows.length; i == data.table.rows.length; i--){
+          if(document.getElementById('text-search').value == data.table.rows[i].c[3].v){
+            console.log("é igual: ");
 
-    if (sheet.getRange('B' + nextRow).getValue() != "") {
-      sheet.getRange('E' + nextRow).setValue("Fechado");
-    } else {
-      sheet.getRange('E' + nextRow).setValue("Aberto");
+            para.textContent = data.table.rows[i].c[5].v + " horas trabalhadas no total";
+
+            break;
+          }
+        }
+      }, 800);
+      document.getElementById("hour-search").appendChild(para);
     }
 
-    // Para a hora
-    var hours = dateWork.getHours();
-    var minutes = dateWork.getMinutes();
-    var seconds = dateWork.getSeconds();
-    var timeString = hours + ":" + minutes + ":" + seconds;
-    sheet.getRange('A' + nextRow).setValue(timeString);
-
-    // Para a data
-    var day = dateWork.getDate();
-    var month = dateWork.getMonth() + 1; // Os meses começam do 0 em JavaScript
-    var year = dateWork.getFullYear();
-    var dateString = day + "/" + month + "/" + year;
-    sheet.getRange('C' + nextRow).setValue(dateString);
-
-  }
-
-  return ContentService.createTextOutput("Success");
-}
-
-} */ 
+*/
