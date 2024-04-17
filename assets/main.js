@@ -28,7 +28,7 @@ fetch(full_url)
             break;
           }
         }
-      }, 800);
+      }, 500);
       document.getElementById("hour-search").appendChild(para);
     }
     
