@@ -18,46 +18,32 @@ fetch(full_url)
 
     function searchHours(){
       let para = document.createElement("p");
-    
+      let para2 = document.createElement("p");
       setInterval(function() { 
         let searchValue = document.getElementById('text-search').value;
-    
+        let containerRight = document.getElementById("divright");
+
+        //console.log(searchValue);
+
         for(let i = data.table.rows.length - 1; i >= 0; i--){
-          if(searchValue == data.table.rows[i].c[3].v){;
+          if(searchValue == data.table.rows[i].c[3].v && data.table.rows[i].c[4].v == "Fechado"){;
             para.textContent = data.table.rows[i].c[5].v /1000 + " horas trabalhadas no total";
+            para2.textContent = "Ponto fechado";
+            break;
+          } else if(searchValue == data.table.rows[i].c[3].v && data.table.rows[i].c[4].v == "Aberto") {
+            para2.textContent = "Ponto aberto";
+            para.textContent = data.table.rows[i-1].c[5].v /1000 + " horas trabalhadas no total";
             break;
           }
         }
       }, 500);
+      para2.style.fontSize = "18px";
+      para.style.fontSize = "20px";
       document.getElementById("hour-search").appendChild(para);
+      document.getElementById("hour-search").appendChild(para2);
+
     }
     
 
     searchHours();
 })
-
-
-
-// loads
-
-/* 
-    function searchHours(){
-      let para = document.createElement("p");
-
-      setInterval(function() { 
-        console.log(document.getElementById('text-search').value); 
-
-        for(let i = data.table.rows.length; i == data.table.rows.length; i--){
-          if(document.getElementById('text-search').value == data.table.rows[i].c[3].v){
-            console.log("é igual: ");
-
-            para.textContent = data.table.rows[i].c[5].v + " horas trabalhadas no total";
-
-            break;
-          }
-        }
-      }, 800);
-      document.getElementById("hour-search").appendChild(para);
-    }
-
-*/
