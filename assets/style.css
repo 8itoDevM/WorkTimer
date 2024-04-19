@@ -20,18 +20,24 @@ body{
 .continer-left{
     padding: 40px;
     background: #929292;
-    height: 190px;
     border-radius: 10px;
     margin-right: 40px;
 }
 
 .continer-left, .continer-rigth{
+    width: 100%;
+    margin-left: 30px;
+    margin-right: 30px;
     text-align: center;
+    height: 290px;
+}
+
+h1{
+    margin-top: 40px;
 }
 
 .continer-rigth{
     padding: 40px;
-    height: 220px;
     background: #929292;
     border-radius: 10px;
 }
@@ -49,12 +55,13 @@ button:hover{
     background-color: #D9D9D9;
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 460px){
     .continer-left, .continer-rigth{
         width: 100%;
         margin: 10px;
         min-width: 347px;
         margin-top: -0px;
+        height: 290px;
     }
 
     body{

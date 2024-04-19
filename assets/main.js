@@ -17,7 +17,7 @@ fetch(full_url)
     // console.log(data.table.rows[0].c[5].v); - Pega as horas semanais totais na tabela
 
     function searchHours(){
-      let para = document.createElement("p");
+      let para = document.getElementById("paraid");
       let para2 = document.createElement("p");
       setInterval(function() { 
         let searchValue = document.getElementById('text-search').value;
@@ -39,7 +39,7 @@ fetch(full_url)
       }, 500);
       para2.style.fontSize = "18px";
       para.style.fontSize = "20px";
-      document.getElementById("hour-search").appendChild(para);
+      //document.getElementById("hour-search").appendChild(para);
       document.getElementById("hour-search").appendChild(para2);
 
     }
